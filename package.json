@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "lint": "./node_modules/.bin/eslint .",
+    "lint": "./node_modules/.bin/eslint ./src",
     "lint--fix": "./node_modules/.bin/eslint . --fix",
     "style-lint": "stylelint '**/*.less'",
-    "build:dev": "webpack --watch --mode development",
+    "build:dev": "npm run lint && npm run style-lint && webpack --watch --mode development",
     "build:prod": "webpack --mode production",
     "start": "node ./bin/www"
   },
