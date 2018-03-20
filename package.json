@@ -6,8 +6,8 @@
     "lint": "./node_modules/.bin/eslint ./src",
     "lint--fix": "./node_modules/.bin/eslint . --fix",
     "style-lint": "stylelint '**/*.less'",
-    "build:dev": "npm run lint && npm run style-lint && webpack --watch --mode development",
-    "build:prod": "webpack --mode production",
+    "build:dev": "webpack --watch --mode development",
+    "build:prod": "npm run lint && npm run style-lint && webpack --mode production",
     "start": "node ./bin/www"
   },
   "dependencies": {
