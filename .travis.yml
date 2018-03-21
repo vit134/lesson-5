@@ -10,9 +10,6 @@ install:
   - docker run -d -p 127.0.0.1:80:80 --name lesson-5 lesson-5
 script:
   - docker ps | grep -q lesson-5
-  - npm run lint
-  - npm run style-lint
-  - npm run build:prod
 jobs:
   include:
     stage: Deploy
