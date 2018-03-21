@@ -2,43 +2,28 @@ const express = require('express');
 
 const router = express.Router();
 
-const {spawn} = require('child_process');
-
-const gitExec = command => (
-	new Promise((resolve, reject) => {
-		const thread = spawn('git', command);
-		const stdOut = [];
-		const stdErr = [];
-
-		thread.stdout.on('data', (data) => {
-			stdOut.push(data.toString('utf8'));
-		});
-
-		thread.stderr.on('data', (data) => {
-			stdErr.push(data.toString('utf8'));
-		});
-
-		thread.on('close', () => {
-			if (stdErr.length) {
-				reject(stdErr.join(''));
-				return;
-			}
-			resolve(stdOut.join());
-		});
-	})
-);
-
-module.exports = gitExec;
-
+const gitExec = require('../modules/GitExec');
 
 gitExec(['branch'])
 	.then((branchInfo) => {
-		console.log(branchInfo);
-	})
+		let branchesInfo = branchInfo[0].split('\n');
+		
+		let branches = branchesInfo.map((el) => {
 
-/* GET home page. */
-router.get('/', (req, res) => {
-	res.render('index', {pageName: 'index', title: 'Express'});
-});
+			return {
+				name: el.trim(),
+				link: el.replace('*', '').trim(),
+				current: el.indexOf('*') !== -1 ? false : true
+			}
+		})
+
+		router.get('/', (req, res) => {
+			res.render('index', {pageName: 'index', title: 'Express', branches: branches});
+		});
+	});
+
 
 module.exports = router;
+
+
+
