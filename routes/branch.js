@@ -3,22 +3,23 @@ const express = require('express');
 const router = express.Router();
 
 const gitExec = require('../modules/GitExec');
+const getFiles = require('../modules/getFiles');
 
 router.get('/:branch', (req, res) => {
-
 	gitExec(['checkout', req.params.branch])
 		.then(() => {
 			gitExec(['log'])
 				.then(result => {
-					console.log(result.data);
-					var commits = [];
+					let commits = [];
 
-					result = result.data.join(' ').split(/\n\nc/);
+					result = result.data.join(' ').split(/\n \nc/);
+					
+					console.log(result);
 
 					result.forEach(function(mit){
 						mit = /^c/.test(mit) ? mit : 'c' + mit;
 
-						var commit = mit.match(/[\da-f]{40}/),
+						let commit = mit.match(/[\da-f]{40}/),
 							author = mit.match(/Author:\s([^<]+)?/),
 							d = mit.match(/Date:\s*(.+)/),
 							comment = mit.match(/\n\n\s*(.+)/);
@@ -30,42 +31,20 @@ router.get('/:branch', (req, res) => {
 							comment: comment[1]
 						});
 
-						/*console.log('commit: ', commit[0]);
-						console.log('author: ', author[1]);
-						console.log('date: ', new Date(d[1]));
-						console.log('comment: ', comment[1]);
-
-						console.log('\n\n');*/
-
 					});
-					
-					console.log(commits);
 
-					res.render('branch', {pageName: 'branch',branchName: req.params.branch, data: commits});
-
-
+					res.render('branch', {pageName: 'branch',branchName: req.params.branch, commits: commits, files: getFiles()});
 				});
-			//}
+		});
+});
 
-
+router.get('/:branch/:commit', (req, res) => {
+	gitExec(['checkout', req.params.commit])
+		.then(() => {
+			res.render('commit', {pageName: 'commit' ,branchName: req.params.branch, commitName: req.params.commit, files: getFiles()});
 		});
 
 
 });
 
-
 module.exports = router;
-
-
-/*
-const express = require('express');
-
-const router = express.Router();
-
-/!* GET users listing. *!/
-router.get('/:branch', (req, res) => {
-	res.render('branch', {pageName: 'branch', title: 'Express', branchName: req.params.branch});
-});
-
-module.exports = router;
-*/

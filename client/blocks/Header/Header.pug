@@ -1,3 +1,6 @@
 header.header
-    div.header__title Git Visualization
-    include ../Nav/Nav.pug
+    a(href="/", class="header__title") Git Visualization
+    div.breadcrumbs
+        a(href="/branch/" + branchName).breadcrumbs__item= branchName
+        span.breadcrumbs__item= commitName
+    //include ../Nav/Nav.pug
