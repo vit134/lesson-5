@@ -1,14 +1,22 @@
 const express = require('express');
 const router = express.Router();
 
+const encDec = require('../modules/EncodeDecodeStr');
+
 var fs = require('fs');
 
-router.get('/:file', (req, res) => {
-	fs.readFile("local-repo/new-branch-commit-1/1.js", "utf8",
+router.get('/', (req, res) => {
+	//console.log();
+	fs.readFile(encDec(req.query.path).decode(), 'utf8',
 		function(error,data){
-			if(error) throw error; // если возникла ошибка
+			if(!error) {
+				res.render('file', {pageName: 'index', nav: false, data: JSON.stringify(data)});
+			} else {
+				res.render('error', {message: 'I am sorry', error: error});
+				//throw error;
+			}
 
-			res.render('file', {pageName: 'index', title: 'Express', data: JSON.stringify(data)});
+
 		});
 
 });

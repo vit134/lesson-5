@@ -18,8 +18,8 @@ router.get('/', (req, res) => {
 						name: el.trim(),
 						link: el.replace('*', '').trim(),
 						current: el.indexOf('*') !== -1 ? false : true
-					}
-				})
+					};
+				});
 			}
 
 

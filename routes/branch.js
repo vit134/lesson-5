@@ -1,6 +1,7 @@
 const express = require('express');
-
 const router = express.Router();
+const moment = require('moment');
+const config = require('config');
 
 const gitExec = require('../modules/GitExec');
 const getFiles = require('../modules/getFiles');
@@ -13,8 +14,6 @@ router.get('/:branch', (req, res) => {
 					let commits = [];
 
 					result = result.data.join(' ').split(/\n \nc/);
-					
-					console.log(result);
 
 					result.forEach(function(mit){
 						mit = /^c/.test(mit) ? mit : 'c' + mit;
@@ -27,7 +26,7 @@ router.get('/:branch', (req, res) => {
 						commits.push({
 							commit: commit[0],
 							author: author[1],
-							date: new Date(d[1]),
+							date: moment(new Date(d[1])).format(config.get('timeFormat')),
 							comment: comment[1]
 						});
 
@@ -41,7 +40,7 @@ router.get('/:branch', (req, res) => {
 router.get('/:branch/:commit', (req, res) => {
 	gitExec(['checkout', req.params.commit])
 		.then(() => {
-			res.render('commit', {pageName: 'commit' ,branchName: req.params.branch, commitName: req.params.commit, files: getFiles()});
+			res.render('commit', {pageName: 'commit', nav: true, branchName: req.params.branch, commitName: req.params.commit, files: getFiles()});
 		});
 
 

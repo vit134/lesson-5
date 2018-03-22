@@ -8,19 +8,20 @@ block content
                 thead
                     tr
                         th Commit
+                        th Comment
                         th Author
                         th Date
-                        th Comment
                 each commit in commits
                     tr
                         td
                             a(href=commit.commit)= commit.commit
+                        td= commit.comment
                         td= commit.author
                         td= commit.date
-                        td= commit.comment
     div.main__title Files
     div.files.main__block
         each file in files
-            div= file
+            div
+                a(href="/file?path=" + file.link)= file.name
 
 

@@ -5,6 +5,6 @@ block content
     div.files.main__block
         each file in files
             div
-                a(href="/file/adsasd")= file
+                a(href="/file?path=" + file.link)= file.name
 
 
