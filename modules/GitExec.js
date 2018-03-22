@@ -2,7 +2,7 @@ const {spawn} = require('child_process');
 
 const gitExec = command => (
 	new Promise((resolve, reject) => {
-		const thread = spawn('git', command);
+		const thread = spawn('git', command, {cwd: './local-repo'});
 		const stdOut = [];
 		const stdErr = [];
 
@@ -14,12 +14,8 @@ const gitExec = command => (
 			stdErr.push(data.toString('utf8'));
 		});
 
-		thread.on('close', () => {
-			if (stdErr.length) {
-				reject(stdErr.join(''));
-				return;
-			}
-			resolve(stdOut);
+		thread.on('close', (code) => {
+			resolve({status: !!stdErr.length , data: stdErr.length ? stdErr.join('') : stdOut, code: code});
 		});
 	})
 );

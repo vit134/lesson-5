@@ -4,23 +4,28 @@ const router = express.Router();
 
 const gitExec = require('../modules/GitExec');
 
-gitExec(['branch'])
-	.then((branchInfo) => {
-		let branchesInfo = branchInfo[0].split('\n');
-		
-		let branches = branchesInfo.map((el) => {
+router.get('/', (req, res) => {
 
-			return {
-				name: el.trim(),
-				link: el.replace('*', '').trim(),
-				current: el.indexOf('*') !== -1 ? false : true
+	gitExec(['branch'])
+		.then((result) => {
+			let branches;
+
+			if (!result.status) {
+				let branchesInfo = result.data[0].split('\n');
+
+				branches = branchesInfo.map((el) => {
+					return {
+						name: el.trim(),
+						link: el.replace('*', '').trim(),
+						current: el.indexOf('*') !== -1 ? false : true
+					}
+				})
 			}
-		})
 
-		router.get('/', (req, res) => {
+
 			res.render('index', {pageName: 'index', title: 'Express', branches: branches});
 		});
-	});
+});
 
 
 module.exports = router;

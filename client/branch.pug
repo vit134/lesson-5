@@ -1,4 +1,20 @@
 extends layout
 
 block content
-    div=branchName
+    //div.error
+        span= data.status ? data.data : ''
+        a(href="/") Go back
+    div= branchName
+    table
+        thead
+            tr
+                th Commit
+                th Author
+                th Date
+                th Comment
+        each commit in data
+            tr
+                td= commit.commit
+                td= commit.author
+                td= commit.date
+                td= commit.comment
