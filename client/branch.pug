@@ -4,7 +4,8 @@ block content
     //div.error
         span= data.status ? data.data : ''
         a(href="/") Go back
-    div= branchName
+    div.title Branch name -
+        span= branchName
     table
         thead
             tr
@@ -14,7 +15,8 @@ block content
                 th Comment
         each commit in data
             tr
-                td= commit.commit
+                td
+                    a(href=commit.commit)= commit.commit
                 td= commit.author
                 td= commit.date
                 td= commit.comment

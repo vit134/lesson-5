@@ -41,7 +41,7 @@ router.get('/:branch', (req, res) => {
 					
 					console.log(commits);
 
-					res.render('branch', {pageName: 'branch', data: commits});
+					res.render('branch', {pageName: 'branch',branchName: req.params.branch, data: commits});
 
 
 				});

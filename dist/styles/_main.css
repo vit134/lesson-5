@@ -8,9 +8,6 @@
   color: #00ff00;
   margin-left: -13px;
 }
-.branches__link:hover {
-  color: #00ff00;
-}
 .header {
   display: -ms-flexbox;
   display: flex;
@@ -30,7 +27,7 @@
   margin-right: 40px;
 }
 .main {
-  padding: 20px;
+  padding: 0 20px;
 }
 .nav {
   display: -ms-flexbox;
@@ -48,14 +45,28 @@ body {
   padding: 0;
   background: #150096;
   color: #fff;
+  padding: 20px;
 }
 a {
   color: #fff;
   text-decoration: none;
 }
+a:hover {
+  color: #00ff00;
+}
+.title {
+  font-size: 20px;
+  padding: 10px 0;
+}
+.title span {
+  font-weight: 700;
+}
 table {
-  border: 2px solid #fff;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
   border-collapse: collapse;
+  margin: 0 -20px;
+  width: calc(100% + 40px);
 }
 table td,
 table th {
@@ -75,4 +86,5 @@ table th {
 .l-content {
   max-width: 1200px;
   margin: 0 auto;
+  border: 6px double;
 }
