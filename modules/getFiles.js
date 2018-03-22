@@ -30,6 +30,21 @@ const getFiles = () => {
 		return results;
 	};
 
+	let createFolder = (folderName, items) => {
+		return (`
+			<ul>
+				${folderName}
+				${items.map(item => item)}
+			</ul>
+		`);
+	};
+
+	let createFile = fileName => {
+		return `<li>${fileName}</li>`;
+	};
+
+	console.log(createFolder('blabla', [createFile('huipizda'), '<li>asdasd</li>']));
+
 	let prepareTree = files => {
 		let papki = {
 			folders: {},
@@ -37,8 +52,30 @@ const getFiles = () => {
 		};
 
 
-		for (var i = 0, item; item = files[i++];) {
-			let all = item.split('/');
+		files.forEach(f => {
+			let all = f.name.split('/');
+			let file = all.pop();
+			let parent = papki;
+
+			all.forEach(ff => {
+				if (ff in parent.folders) {
+					parent = parent.folders[ff];
+				} else {
+					parent.folders[ff] = {
+						folders: {},
+						files: []
+					};
+
+					parent = parent.folders[ff];
+				}
+			});
+			parent.files.push(file);
+		});
+
+		return papki;
+
+		/*for (var i = 0, item; item = files[i++];) {
+			let all = item.name.split('/');
 			let file = all.pop();
 			let parent = papki;
 
@@ -57,11 +94,11 @@ const getFiles = () => {
 			parent.files.push(file);
 		}
 
-		return papki;
+		return papki;*/
 	};
 
 
-	//prepareTree(walk(dir));
+	console.dir(prepareTree(walk(dir)));
 
 	return walk(dir);
 };
