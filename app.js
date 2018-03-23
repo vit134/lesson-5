@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
-const users = require('./routes/users');
 const branch = require('./routes/branch');
 const file = require('./routes/file');
 
@@ -27,7 +26,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/branch', branch);
 app.use('/file', file);
 
