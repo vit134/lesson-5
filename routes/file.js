@@ -6,7 +6,6 @@ const encDec = require('../modules/EncodeDecodeStr');
 var fs = require('fs');
 
 router.get('/', (req, res) => {
-	//console.log();
 	fs.readFile(encDec(req.query.path).decode(), 'utf8',
 		function(error,data){
 			if(!error) {

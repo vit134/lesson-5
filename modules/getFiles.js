@@ -1,106 +1,77 @@
 const fs = require('fs');
 const config = require('config');
-const encDec = require('./EncodeDecodeStr');
+const Tree = require('directory-tree');
 
 const getFiles = () => {
-	let dir = config.get('repoPath');
+	const dir = config.get('repoPath');
+	let glogbalUl = '<ul>';
+	let filesTree;
 
-	let walk = function (dir) {
-		let results = [];
-		let list = fs.readdirSync(dir);
+	let getFilesArr = new Promise((resolve, reject) => {
+		resolve(Tree(dir, {exclude: new RegExp('.git')}));
+	});
 
-		list.forEach(file => {
-			if (file !== '.git') {
-				file = dir + '/' + file;
-				file = file.replace('./', '');
+	const createFolder = (folderName, empty) => {
+		let ul = `<li>${folderName}`;
 
-
-				let link = encDec(file).encode();
-
-				let stat = fs.statSync(file);
-				if (stat && stat.isDirectory()) {
-					results = results.concat(walk(file));
-				} else {
-					results.push({name:file, link: link});
-				}
-			}
-		});
-		
-		console.log(results);
-		return results;
-	};
-
-	let createFolder = (folderName, items) => {
-		return (`
-			<ul>
-				${folderName}
-				${items.map(item => item)}
-			</ul>
-		`);
-	};
-
-	let createFile = fileName => {
-		return `<li>${fileName}</li>`;
-	};
-
-	console.log(createFolder('blabla', [createFile('huipizda'), '<li>asdasd</li>']));
-
-	let prepareTree = files => {
-		let papki = {
-			folders: {},
-			files: []
-		};
-
-
-		files.forEach(f => {
-			let all = f.name.split('/');
-			let file = all.pop();
-			let parent = papki;
-
-			all.forEach(ff => {
-				if (ff in parent.folders) {
-					parent = parent.folders[ff];
-				} else {
-					parent.folders[ff] = {
-						folders: {},
-						files: []
-					};
-
-					parent = parent.folders[ff];
-				}
-			});
-			parent.files.push(file);
-		});
-
-		return papki;
-
-		/*for (var i = 0, item; item = files[i++];) {
-			let all = item.name.split('/');
-			let file = all.pop();
-			let parent = papki;
-
-			for (var j = 1, jitem; jitem = all[j++];) {
-				if (jitem in parent.folders) {
-					parent = parent.folders[jitem];
-				} else {
-					parent.folders[jitem] = {
-						folders: {},
-						files: []
-					};
-
-					parent = parent.folders[jitem];
-				}
-			}
-			parent.files.push(file);
+		if (empty) {
+			ul += '</li>';
+		} else {
+			ul += '<ul>';
 		}
 
-		return papki;*/
+		return ul;
 	};
 
+	const closeFolder = () => {
+		return '</ul></li>';
+	};
 
-	console.dir(prepareTree(walk(dir)));
+	const createTreeHtml = tree => {
 
-	return walk(dir);
+		const walk = items => {
+			let filesInFolder = '';
+
+			if (items) {
+				items.forEach(item => {
+					if (item.type === 'directory') {
+
+						if (item.children && item.children.length > 0) {
+							glogbalUl += createFolder(item.name, !item.children);
+							walk(item.children);
+							glogbalUl += closeFolder();
+						} else {
+							glogbalUl += createFolder(item.name, true);
+						}
+					} else {
+						filesInFolder += createFolder(item.name, true);
+					}
+				});
+			}
+
+			glogbalUl += filesInFolder;
+		};
+
+		walk(tree.children);
+	};
+
+	getFilesArr.then(result => {
+		fs.writeFile(dir + '/tree.json', JSON.stringify(result), function(error){
+			if(error) throw error;
+		});
+
+		createTreeHtml(result);
+
+		let aa = glogbalUl + '</ul>';
+
+		fs.writeFile(dir + '/tree.html', aa, function(error){
+			if(error) throw error;
+		});
+
+	},error => {
+		throw error;
+	});
+
 };
 
 module.exports = getFiles;
