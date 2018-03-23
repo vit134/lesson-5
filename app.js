@@ -16,6 +16,8 @@ const app = express();
 app.set('views', path.join(__dirname, 'client/'));
 app.set('view engine', 'pug');
 
+app.use(express.static(path.join(__dirname, 'public/')));
+
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));

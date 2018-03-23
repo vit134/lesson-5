@@ -32,7 +32,7 @@ router.get('/:branch', (req, res) => {
 
 					});
 
-					res.render('branch', {pageName: 'branch',branchName: req.params.branch, commits: commits, files: getFiles()});
+					res.render('branch', {pageName: 'branch', branchName: req.params.branch, commits: commits, files: getFiles()});
 				});
 		});
 });
@@ -42,8 +42,7 @@ router.get('/:branch/:commit', (req, res) => {
 		.then(() => {
 			res.render('commit', {pageName: 'commit', nav: true, branchName: req.params.branch, commitName: req.params.commit, files: getFiles()});
 		});
-
-
 });
+
 
 module.exports = router;

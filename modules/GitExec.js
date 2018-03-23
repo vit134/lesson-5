@@ -2,7 +2,7 @@ const {spawn} = require('child_process');
 const config = require('config');
 
 const gitExec = command => (
-	new Promise((resolve, reject) => {
+	new Promise((resolve) => {
 		const thread = spawn('git', command, {cwd: config.get('repoPath')});
 		const stdOut = [];
 		const stdErr = [];

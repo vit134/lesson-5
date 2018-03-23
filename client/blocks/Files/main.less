@@ -1,3 +1,72 @@
 .files {
     padding: 20px;
+
+    & textarea {
+        display: block;
+        width: 100%;
+        min-height: 50vh;
+        padding: 20px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    & ul {
+        margin: 0;
+        padding: 0 0 0 18px;
+
+        &.visible {
+            display: block !important;
+        }
+    }
+
+    & li,
+    & li a {
+        font-size: 18px;
+    }
+
+
+    
+    & li {
+        cursor: default;
+        position: relative;
+        list-style: none;
+
+        &.visible > ul {
+            display: block !important;
+        }
+
+        &.directory {
+            &:before {
+                content: "";
+                display: block;
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                top: 3px;
+                left: -20px;
+                background: url('../folder.svg') center no-repeat;
+                background-size: 100%;
+            }
+        }
+
+        &.file {
+            &:before {
+                content: "";
+                display: block;
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                top: 2px;
+                left: -20px;
+                background: url('../file.svg') center no-repeat;
+                background-size: 100%;
+            }
+        }
+    }
+
+    & li > ul {
+        display: none;
+    }
+
+
 }

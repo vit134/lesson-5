@@ -1,6 +1,6 @@
 extends layout
 
 block content
-    div.main__title File
+    div.main__title File - #{fileName}
     div.files.main__block
-        div.file-area '#{data}'
+        textarea.file-area= data

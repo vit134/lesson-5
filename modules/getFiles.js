@@ -1,18 +1,21 @@
-const fs = require('fs');
 const config = require('config');
+const encodeDecode = require('./EncodeDecodeStr');
 const Tree = require('directory-tree');
 
 const getFiles = () => {
 	const dir = config.get('repoPath');
+	const filesTree = Tree(dir, {exclude: new RegExp('.git')});
 	let glogbalUl = '<ul>';
-	let filesTree;
 
-	let getFilesArr = new Promise((resolve, reject) => {
-		resolve(Tree(dir, {exclude: new RegExp('.git')}));
-	});
+	const createItem = (name, type, link, empty) => {
 
-	const createFolder = (folderName, empty) => {
-		let ul = `<li>${folderName}`;
+		let ul = `<li class="${type}">`;
+
+		if (link && link !== '') {
+			ul += `<a href="/file/${name}?path=${link}">${name}</a>`;
+		} else {
+			ul += name;
+		}
 
 		if (empty) {
 			ul += '</li>';
@@ -23,7 +26,7 @@ const getFiles = () => {
 		return ul;
 	};
 
-	const closeFolder = () => {
+	const closeItem = () => {
 		return '</ul></li>';
 	};
 
@@ -37,14 +40,14 @@ const getFiles = () => {
 					if (item.type === 'directory') {
 
 						if (item.children && item.children.length > 0) {
-							glogbalUl += createFolder(item.name, !item.children);
+							glogbalUl += createItem(item.name, item.type, null, !item.children);
 							walk(item.children);
-							glogbalUl += closeFolder();
+							glogbalUl += closeItem();
 						} else {
-							glogbalUl += createFolder(item.name, true);
+							glogbalUl += createItem(item.nameitem.type, null, true);
 						}
 					} else {
-						filesInFolder += createFolder(item.name, true);
+						filesInFolder += createItem(item.name, item.type, encodeDecode(item.path).encode(), true);
 					}
 				});
 			}
@@ -55,22 +58,9 @@ const getFiles = () => {
 		walk(tree.children);
 	};
 
-	getFilesArr.then(result => {
-		fs.writeFile(dir + '/tree.json', JSON.stringify(result), function(error){
-			if(error) throw error;
-		});
+	createTreeHtml(filesTree);
 
-		createTreeHtml(result);
-
-		let aa = glogbalUl + '</ul>';
-
-		fs.writeFile(dir + '/tree.html', aa, function(error){
-			if(error) throw error;
-		});
-
-	},error => {
-		throw error;
-	});
+	return glogbalUl;
 
 };
 

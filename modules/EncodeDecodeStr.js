@@ -2,6 +2,7 @@ module.exports = (str) => {
 	
 	let encode = () => {
 		let VRegExp = new RegExp(/\//g);
+		//str = str.split('/').slice(1).join('/');
 
 		return str.replace(VRegExp, '%%');
 	};

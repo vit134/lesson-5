@@ -63,19 +63,57 @@
 .files {
   padding: 20px;
 }
-html,
-body {
+.files textarea {
+  display: block;
+  width: 100%;
+  min-height: 50vh;
+  padding: 20px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+.files ul {
   margin: 0;
-  padding: 0;
-  background: #150096;
-  color: #fff;
+  padding: 0 0 0 18px;
 }
-a {
-  color: #fff;
-  text-decoration: none;
+.files ul.visible {
+  display: block !important;
 }
-a:hover {
-  color: #0f0;
+.files li,
+.files li a {
+  font-size: 18px;
+}
+.files li {
+  cursor: default;
+  position: relative;
+  list-style: none;
+}
+.files li.visible > ul {
+  display: block !important;
+}
+.files li.directory:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 3px;
+  left: -20px;
+  background: url('../folder.svg') center no-repeat;
+  background-size: 100%;
+}
+.files li.file:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 2px;
+  left: -20px;
+  background: url('../file.svg') center no-repeat;
+  background-size: 100%;
+}
+.files li > ul {
+  display: none;
 }
 .header {
   display: -ms-flexbox;
@@ -94,19 +132,6 @@ a:hover {
   line-height: 30px;
   text-transform: uppercase;
   margin-right: 40px;
-}
-.l-content {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column;
-  max-width: 1200px;
-  border: 6px double;
-  margin: 20px auto;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-align: stretch;
-      align-items: stretch;
 }
 .main__title {
   font-size: 20px;
@@ -129,4 +154,31 @@ a:hover {
 .nav__item {
   padding: 0 20px 0 0;
   font-size: 16px;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #150096;
+  color: #fff;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
+a:hover {
+  color: #0f0;
+}
+.l-content {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  max-width: 1200px;
+  border: 6px double;
+  margin: 20px auto;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: stretch;
+      align-items: stretch;
 }

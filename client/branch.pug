@@ -19,9 +19,7 @@ block content
                         td= commit.author
                         td= commit.date
     div.main__title Files
-    div.files.main__block
-        each file in files
-            div
-                a(href="/file?path=" + file.link)= file.name
+    div.files.main__block !{files}
+
 
 
