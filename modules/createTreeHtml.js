@@ -1,10 +1,6 @@
-const config = require('config');
 const encodeDecode = require('./EncodeDecodeStr');
-const Tree = require('directory-tree');
 
-const getFiles = () => {
-	const dir = config.get('repoPath');
-	const filesTree = Tree(dir, {exclude: new RegExp('.git')});
+const createHtml = filesTree => {
 	let glogbalUl = '<ul>';
 
 	const createItem = (name, type, link, empty) => {
@@ -64,4 +60,4 @@ const getFiles = () => {
 
 };
 
-module.exports = getFiles;
+module.exports = createHtml;

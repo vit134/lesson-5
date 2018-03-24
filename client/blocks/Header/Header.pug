@@ -2,5 +2,5 @@ header.header
     a(href="/", class="header__title") Git Visualization
     if nav
         div.breadcrumbs
-            a(href="/branch/" + branchName).breadcrumbs__item= branchName
+            a(href="/branch/" + branchName + "/").breadcrumbs__item= branchName
             span.breadcrumbs__item= commitName
