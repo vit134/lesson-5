@@ -2,8 +2,13 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/styles/__main.css')
+    link(rel="shortcut icon", href="/public/favicon.ico", type="image/x-icon")
+    link(rel='stylesheet', href='/styles/_main.css')
   body
-    include blocks/Header/Header
-    block content
+    div.l-content
+      include blocks/Header/Header
+      div.main
+        block content
+
+
     script(src='/scripts/'+ pageName +'.js')

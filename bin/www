@@ -8,11 +8,13 @@ var app = require('../app');
 var debug = require('debug')('lesson-5:server');
 var http = require('http');
 
+const config = require('config');
+
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(config.get('server.port') || process.env.PORT);
 app.set('port', port);
 
 /**
