@@ -1,8 +1,10 @@
 module.exports = files => {
 	console.log('!prepare tree data!');
+		
+	//console.log('files',files);
 
 
-	console.log(files);
+	//console.log(files);
 	let prepareTree = files => {
 		let papki = {
 			folders: {},
@@ -38,5 +40,5 @@ module.exports = files => {
 
 
 
-	return false;
+	return files;
 };
