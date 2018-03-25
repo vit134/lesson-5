@@ -19,7 +19,13 @@ block content
                         td= commit.author
                         td= commit.date
     div.main__title Files
-    div.files.main__block !{files}
+    div.files.main__block
+        table
+            each file in files
+                tr
+                    td= file.path
+                    td= file.name
+                    td= file.hash
 
 
 

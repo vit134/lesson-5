@@ -21,7 +21,7 @@ router.get('/:branch', (req, res) => {
 		getTree(files);
 
 		res.render('branch', {pageName: 'branch', branchName: req.params.branch, commits: commits, files: files});
-	})
+	});
 });
 
 /*router.get('/:branch/:commit', (req, res) => {
