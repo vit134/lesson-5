@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 		},
 		error => {
 			// вторая функция - запустится при вызове reject
-			console.log(("index.js Rejected: " + error); // error - аргумент reject
+			console.log("index.js Rejected: " + error); // error - аргумент reject
 			res.render('error', {pageName: 'index', title: 'Express'});
 		});
 });
