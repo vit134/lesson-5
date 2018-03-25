@@ -16,6 +16,7 @@ script:
 jobs:
   include:
     stage: Deploy
+    before_deploy: echo "before_deploy"
     deploy:
       provider: heroku
       api_key:
