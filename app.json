@@ -1,16 +1,4 @@
 {
   "name": "lesson-5",
-  "scripts": {},
-  "env": {},
-  "formation": {
-    "web": {
-      "quantity": 1
-    }
-  },
-  "addons": [],
-  "buildpacks": [
-    {
-      "url": "heroku/nodejs"
-    }
-  ]
+  "repository": "https://github.com/vit134/lesson-5/"
 }
