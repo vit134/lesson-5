@@ -1,5 +1,6 @@
 FROM node:carbon
 
+ENV PORT=80
 ENV NODE_ENV='production'
 
 WORKDIR ./
@@ -11,6 +12,4 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
-
-CMD [ "npm", "start" ]
+CMD npm start -- --port $PORT
