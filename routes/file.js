@@ -3,10 +3,19 @@ const router = express.Router();
 
 const encDec = require('../modules/EncodeDecodeStr');
 
-var fs = require('fs');
+const gitExec = require('../modules/GitExec');
+
 
 router.get('/:name', (req, res) => {
-	fs.readFile(encDec(req.query.path).decode(), 'utf8',
+	let getFileContent = gitExec(['show', req.params.name]);
+
+	getFileContent
+		.then(result => {
+			console.log(result);
+			res.render('file', {pageName: 'index', nav: false, fileName: req.query.name, data: result.data});
+		})
+
+	/*fs.readFile(encDec(req.query.path).decode(), 'utf8',
 		function(error,data){
 			if(!error) {
 				res.render('file', {pageName: 'index', nav: false, fileName: req.params.name, data: JSON.stringify(data)});
@@ -15,7 +24,7 @@ router.get('/:name', (req, res) => {
 			}
 
 
-		});
+		});*/
 
 });
 

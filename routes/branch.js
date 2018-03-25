@@ -24,12 +24,16 @@ router.get('/:branch', (req, res) => {
 	});
 });
 
-/*router.get('/:branch/:commit', (req, res) => {
-	gitExec(['checkout', req.params.commit])
-		.then(() => {
-			res.render('commit', {pageName: 'commit', nav: true, branchName: req.params.branch, commitName: req.params.commit, files: getFiles()});
+router.get('/:branch/:commit', (req, res) => {
+	let getFiles = gitExec(['ls-tree','-r', req.params.commit]);
+
+	getFiles
+		.then((result) => {
+			let files = parseGit.files(result);
+
+			res.render('commit', {pageName: 'commit', nav: true, branchName: req.params.branch, commitName: req.params.commit, files: files});
 		});
-});*/
+});
 
 
 module.exports = router;
