@@ -12,4 +12,4 @@ RUN npm run clone
 
 COPY . .
 
-CMD npm start -- --port $PORT
+CMD npm start
