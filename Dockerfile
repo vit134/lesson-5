@@ -12,4 +12,6 @@ RUN npm install
 
 COPY . .
 
-CMD echo${PORT} && /npm start -- --port $PORT
+CMD echo blablabla ${PORT}
+
+CMD npm start -- --port $PORT
