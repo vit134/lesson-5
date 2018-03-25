@@ -5,6 +5,8 @@ const router = express.Router();
 const gitExec = require('../modules/GitExec');
 
 router.get('/', (req, res) => {
+	
+	console.log('index.js');
 
 	gitExec(['branch'])
 		.then((result) => {
