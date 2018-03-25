@@ -9,6 +9,10 @@ cache:
   directories:
   - node_modules
 
+script:
+  - npm run lint
+  - npm run style-lint
+
 aliases:
   deploy: &deploy
     provider: heroku
@@ -18,11 +22,14 @@ aliases:
 
 jobs:
   include:
-
-
+    - stage: lint
+      script:
+        - npm run lint
+        - npm run style-lint
 
     - stage: Deploy
-      script: skip
+      script:
+        - npm run build:prod
       deploy:
         <<: *deploy
         app: lesson-5-staging

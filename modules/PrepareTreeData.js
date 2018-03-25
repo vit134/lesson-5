@@ -1,11 +1,11 @@
 module.exports = files => {
-	console.log('!prepare tree data!');
+	//console.log('!prepare tree data!');
 		
 	//console.log('files',files);
 
 
 	//console.log(files);
-	let prepareTree = files => {
+	/*let prepareTree = files => {
 		let papki = {
 			folders: {},
 			files: []
@@ -19,7 +19,7 @@ module.exports = files => {
 
 			for (var j = 1, jitem; jitem = all[j++];) {
 				if (jitem in parent.folders) {
-					parent = parent.folders[jitem]
+					parent = parent.folders[jitem];
 				} else {
 					parent.folders[jitem] = {
 						folders: {},
@@ -33,9 +33,9 @@ module.exports = files => {
 		}
 
 		return papki;
-	}
+	};*/
 	
-	console.log(prepareTree(files));
+	//console.log(prepareTree(files));
 
 
 

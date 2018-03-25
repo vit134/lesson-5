@@ -1,13 +1,13 @@
-const fs = require('fs');
-
-module.exports = filesPath => {
-	let treeData = require('./PrepareTreeData')(filesPath);
-	let html = require('./createTreeHtml');
+module.exports = (/*filePath*/) => {
 
 
-	console.log('asd',treeData);
+	//let treeData = require('./PrepareTreeData')(filesPath);
+	//let html = require('./createTreeHtml');
+
+
+	//console.log('asd',treeData);
 	
-	console.log(JSON.stringify(treeData));
+	//console.log(JSON.stringify(treeData));
 
 	/*fs.writeFile("tree.json", JSON.stringify(treeData), function(error){
 

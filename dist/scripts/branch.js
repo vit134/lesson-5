@@ -2,29 +2,23 @@
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = (() => {
 	let dir = document.querySelectorAll('.directory');
-	
-	
+
 	dir.forEach(function (d) {
 		d.addEventListener('click', (e) => {
 			e.stopPropagation();
 			e.target.classList.toggle('visible');
 		});
 	}.bind(this));
-	
-
-	function _toogleSubDir() {
-		console.log(this);
-	}
 })();
 }).call(this,require("Wb8Gej"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../blocks/Files/main.js","/../blocks/Files")
 },{"Wb8Gej":5,"buffer":4}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
-console.log('branch.js');
+//console.log('branch.js');
 
 require('../blocks/Files/main');
-}).call(this,require("Wb8Gej"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_4924df86.js","/")
+}).call(this,require("Wb8Gej"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_a86924b5.js","/")
 },{"../blocks/Files/main":1,"Wb8Gej":5,"buffer":4}],3:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
