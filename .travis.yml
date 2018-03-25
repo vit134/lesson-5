@@ -10,6 +10,7 @@ install:
   - docker run -p 3000:3000 -d vit134/node-web-app
 script:
   - docker ps | grep -q node-web-app
+  - npm install
   - npm run lint
   - npm run style-lint
 jobs:
