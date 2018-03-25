@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 	console.log('index.js');
 
 	gitExec(['branch'])
-		.then((result) => {
+		.then(result => {
 			let branches;
 
 			if (!result.status) {
@@ -23,9 +23,15 @@ router.get('/', (req, res) => {
 					};
 				});
 			}
-
+			
+			console.log(branches);
 
 			res.render('index', {pageName: 'index', title: 'Express', branches: branches});
+		},
+		error => {
+			// вторая функция - запустится при вызове reject
+			console.log(("index.js Rejected: " + error); // error - аргумент reject
+			res.render('error', {pageName: 'index', title: 'Express'});
 		});
 });
 
