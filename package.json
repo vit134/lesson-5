@@ -9,7 +9,7 @@
     "style-lint--fix": "stylelint '**/*.less' --fix",
     "build:dev": "gulp watch --env development",
     "build:prod": "npm run lint && npm run style-lint && gulp build --env production",
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
