@@ -18,16 +18,6 @@ jobs:
         - npm run lint
         - npm run style-lint
 
-    - stage: deploy to staging
-        deploy: &heroku
-        provider: heroku
-        app: lesson-5-staging
-        script:
-          - docker build -t vit134/node-web-app .
-          - docker run -p 3000:3000 -d vit134/node-web-app
-        on:
-          branch: git-vis
-
     - stage: Deploy
       before_deploy: echo "before_deploy"
       deploy:  &heroku
