@@ -1,48 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const moment = require('moment');
-const config = require('config');
 
 const gitExec = require('../modules/GitExec');
-const getFiles = require('../modules/getFiles');
+const parseGit = require('../modules/ParseGitString');
+const getTree = require('../modules/CreateTree');
+//const getFiles = require('../modules/getFiles');
 
 router.get('/:branch', (req, res) => {
-	gitExec(['checkout', req.params.branch])
-		.then(() => {
-			gitExec(['log'])
-				.then(result => {
-					let commits = [];
+	let getCommits = gitExec(['log', req.params.branch]);
+	let getFiles = gitExec(['ls-tree','-r', req.params.branch]);
 
-					result = result.data.join(' ').split(/\n \nc/);
+	Promise.all([getCommits, getFiles]).then(result => {
+		let commitResult = result[0];
+		let filesResult = result[1];
 
-					result.forEach(function(mit){
-						mit = /^c/.test(mit) ? mit : 'c' + mit;
+		let commits = parseGit.commit(commitResult);
+		let files = parseGit.files(filesResult);
+		
 
-						let commit = mit.match(/[\da-f]{40}/),
-							author = mit.match(/Author:\s([^<]+)?/),
-							d = mit.match(/Date:\s*(.+)/),
-							comment = mit.match(/\n\n\s*(.+)/);
+		getTree(files);
 
-						commits.push({
-							commit: commit[0],
-							author: author[1],
-							date: moment(new Date(d[1])).format(config.get('timeFormat')),
-							comment: comment[1]
-						});
-
-					});
-
-					res.render('branch', {pageName: 'branch', branchName: req.params.branch, commits: commits, files: getFiles()});
-				});
-		});
+		res.render('branch', {pageName: 'branch', branchName: req.params.branch, commits: commits, files: files});
+	})
 });
 
-router.get('/:branch/:commit', (req, res) => {
+/*router.get('/:branch/:commit', (req, res) => {
 	gitExec(['checkout', req.params.commit])
 		.then(() => {
 			res.render('commit', {pageName: 'commit', nav: true, branchName: req.params.branch, commitName: req.params.commit, files: getFiles()});
 		});
-});
+});*/
 
 
 module.exports = router;
