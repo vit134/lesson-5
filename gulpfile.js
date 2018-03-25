@@ -3,7 +3,7 @@
 
 const gulp = require('gulp'),
 	gulpif = require('gulp-if'),
-	uglify = require('gulp-uglify'),
+	//uglify = require('gulp-uglify'),
 	concat = require('gulp-concat'),
 	browserify = require('gulp-browserify'),
 	cleanCSS = require('gulp-clean-css'),
