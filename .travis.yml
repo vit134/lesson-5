@@ -17,6 +17,9 @@ jobs:
       script:
         - npm run lint
         - npm run style-lint
+    - stage: test
+      script:
+        - echo "test here in feature"
 
     - stage: Deploy
       before_deploy: echo "before_deploy"
