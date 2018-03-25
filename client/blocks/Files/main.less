@@ -14,7 +14,7 @@
         margin: 0;
         padding: 0 0 0 18px;
 
-        &.visible {
+        .visible {
             display: block !important;
         }
     }
@@ -31,13 +31,14 @@
         position: relative;
         list-style: none;
 
-        &.visible > ul {
+        .visible > ul {
             display: block !important;
         }
 
-        &.directory {
+        .directory {
+
             &:before {
-                content: "";
+                content: '';
                 display: block;
                 position: absolute;
                 width: 15px;
@@ -49,9 +50,10 @@
             }
         }
 
-        &.file {
+        .file {
+
             &:before {
-                content: "";
+                content: '';
                 display: block;
                 position: absolute;
                 width: 15px;
