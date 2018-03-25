@@ -49,9 +49,9 @@ gulp.task('scripts', function () {
 		.pipe(browserify({
 			insertGlobals: true
 		}))
-		.pipe(gulpif(!development, uglify().on('error', function (e) {
+		/*.pipe(gulpif(!development, uglify().on('error', function (e) {
 			console.log(e);
-		})))
+		})))*/
 		.pipe(gulp.dest(path.build.scripts));
 });
 
