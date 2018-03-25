@@ -20,7 +20,7 @@ jobs:
 
     - stage: Deploy
       before_deploy: echo "before_deploy"
-      deploy: &heroku
+      deploy: heroku
       provider: heroku
       script: skip
       api_key:
