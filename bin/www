@@ -14,7 +14,7 @@ const config = require('config');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(config.get('server.port') || process.env.PORT);
+var port = normalizePort(process.env.PORT || 3000);
 app.set('port', port);
 
 /**
@@ -89,4 +89,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log('server listening port ' + port);
 }

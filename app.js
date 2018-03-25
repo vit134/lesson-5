@@ -11,6 +11,8 @@ const file = require('./routes/file');
 
 const app = express();
 
+console.log('app.js');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'client/'));
 app.set('view engine', 'pug');
