@@ -1,8 +1,8 @@
-module.exports = (() => {
-	let dir = document.querySelectorAll('.directory');
+module.exports = (function () {
+	var dir = document.querySelectorAll('.directory');
 
 	dir.forEach(function (d) {
-		d.addEventListener('click', (e) => {
+		d.addEventListener('click', function(e) {
 			e.stopPropagation();
 			e.target.classList.toggle('visible');
 		});

@@ -3,7 +3,7 @@
 
 const gulp = require('gulp'),
 	gulpif = require('gulp-if'),
-	//uglify = require('gulp-uglify'),
+	uglify = require('gulp-uglify'),
 	concat = require('gulp-concat'),
 	browserify = require('gulp-browserify'),
 	cleanCSS = require('gulp-clean-css'),
@@ -49,9 +49,9 @@ gulp.task('scripts', function () {
 		.pipe(browserify({
 			insertGlobals: true
 		}))
-		/*.pipe(gulpif(!development, uglify().on('error', function (e) {
+		.pipe(gulpif(!development, uglify().on('error', function (e) {
 			console.log(e);
-		})))*/
+		})))
 		.pipe(gulp.dest(path.build.scripts));
 });
 
