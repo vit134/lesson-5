@@ -2,9 +2,9 @@ FROM node:carbon
 
 ENV NODE_ENV='production'
 
-WORKDIR .
+WORKDIR ./
 
-COPY package*.json .
+COPY package*.json ./
 
 
 RUN npm install
