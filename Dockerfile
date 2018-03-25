@@ -1,6 +1,5 @@
 FROM node:carbon
 
-ENV PORT=3000
 ENV NODE_ENV='production'
 
 WORKDIR ./
