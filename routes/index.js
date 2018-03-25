@@ -2,43 +2,38 @@ const express = require('express');
 
 const router = express.Router();
 
-const {spawn} = require('child_process');
+const gitExec = require('../modules/GitExec');
 
-const gitExec = command => (
-	new Promise((resolve, reject) => {
-		const thread = spawn('git', command);
-		const stdOut = [];
-		const stdErr = [];
-
-		thread.stdout.on('data', (data) => {
-			stdOut.push(data.toString('utf8'));
-		});
-
-		thread.stderr.on('data', (data) => {
-			stdErr.push(data.toString('utf8'));
-		});
-
-		thread.on('close', () => {
-			if (stdErr.length) {
-				reject(stdErr.join(''));
-				return;
-			}
-			resolve(stdOut.join());
-		});
-	})
-);
-
-module.exports = gitExec;
-
-
-gitExec(['branch'])
-	.then((branchInfo) => {
-		console.log(branchInfo);
-	})
-
-/* GET home page. */
 router.get('/', (req, res) => {
-	res.render('index', {pageName: 'index', title: 'Express'});
+	
+	console.log('index.js');
+
+	gitExec(['branch'])
+		.then(result => {
+			let branches = [{}];
+
+			if (!result.status) {
+				let branchesInfo = result.data[0].split('\n');
+
+				branches = branchesInfo.map((el) => {
+					return {
+						name: el.trim(),
+						link: el.replace('*', '').trim(),
+						current: el.indexOf('*') !== -1 ? false : true
+					};
+				});
+			}
+			
+			console.log(branches);
+
+			res.render('index', {pageName: 'index', title: 'Express', branches: branches});
+		},
+		error => {
+			// вторая функция - запустится при вызове reject
+			console.log('index.js Rejected: ' + error); // error - аргумент reject
+			res.render('error', {pageName: 'index', title: 'Express'});
+		});
 });
+
 
 module.exports = router;
