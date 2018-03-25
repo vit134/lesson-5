@@ -14,3 +14,9 @@
           - docker run -p 3000:3000 -d vit134/node-web-app
         on:
           branch: git-vis
+
+
+          - stage: lint
+                script:
+                  - npm run lint
+                  - npm run style-lint
