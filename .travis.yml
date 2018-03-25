@@ -23,4 +23,7 @@ jobs:
       app:
         staging: lesson-5-staging
         master: lesson-5-poduction
+      run:
+        - docker build -t vit134/node-web-app .
+        - docker run -p 3000:3000 -d vit134/node-web-app
       skip_cleanup: true
