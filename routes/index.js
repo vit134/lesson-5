@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 
 	gitExec(['branch'])
 		.then(result => {
-			let branches;
+			let branches = 'no branches yet';
 
 			if (!result.status) {
 				let branchesInfo = result.data[0].split('\n');
