@@ -3,8 +3,6 @@
 # branch test2
 
 
-
-
     - stage: deploy to staging
         deploy: &heroku
         provider: heroku
@@ -16,7 +14,7 @@
           branch: git-vis
 
 
-          - stage: lint
-                script:
-                  - npm run lint
-                  - npm run style-lint
+    - stage: lint
+        script:
+          - npm run lint
+          - npm run style-lint
