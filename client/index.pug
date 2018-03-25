@@ -1,8 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  div.bla
-      div.hui
-          ul
+    div.main__title All branches
+        span.main__title__comment (* indicates the current branch)
+    div.branches.main__block
+        each val in branches
+            div.branches__item
+                a(href="branch/" + val.link + "/", class=val.current ? "" : "current", class="branches__link")= val.name
