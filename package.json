@@ -53,9 +53,15 @@
     "less-loader": "^4.1.0",
     "mocha": "^5.0.5",
     "nodemon": "^1.17.2",
+    "pre-commit": "^1.2.2",
     "stylelint": "^9.1.3",
     "stylelint-config-standard": "^18.2.0",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12"
-  }
+  },
+  "pre-commit": [
+    "lint",
+    "style-lint",
+    "test"
+  ]
 }
