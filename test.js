@@ -3,8 +3,7 @@ var assert = require('chai').assert;
 const parseGit = require('./modules/ParseGitString');
 
 describe('ParseGitString', function() {
-
-
+	
 	/*
 		Проверка свойств объекта
 		map (Array) - массив соответствия
@@ -40,7 +39,7 @@ describe('ParseGitString', function() {
 		});
 
 		return result === map.length;
-	}
+	};
 
 	describe('ParseGitString.Commit', function() {
 		//на вход передаю строку с коммитом
