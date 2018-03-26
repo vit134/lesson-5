@@ -9,7 +9,7 @@ describe('ParseGitString', function() {
 		map (Array) - массив соответствия
 		obj	- (Obkect) - проверяемый объект
 	*/
-	let checkObjProp = (map, obj) => {asd
+	let checkObjProp = (map, obj) => {
 		let result = 0;
 
 		map.forEach(el => {
