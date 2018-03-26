@@ -1,0 +1,95 @@
+02:03:21.507 INFO - Selenium build info: version: '3.0.1', revision: '1969d75'
+02:03:21.508 INFO - Launching a standalone Selenium Server
+2018-03-27 02:03:21.595:INFO::main: Logging initialized @671ms
+02:03:21.717 INFO - Driver provider org.openqa.selenium.ie.InternetExplorerDriver registration is skipped:
+ registration capabilities Capabilities [{ensureCleanSession=true, browserName=internet explorer, version=, platform=WINDOWS}] does not match the current platform MAC
+02:03:21.718 INFO - Driver provider org.openqa.selenium.edge.EdgeDriver registration is skipped:
+ registration capabilities Capabilities [{browserName=MicrosoftEdge, version=, platform=WINDOWS}] does not match the current platform MAC
+02:03:21.718 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+02:03:21.719 INFO - Driver provider com.opera.core.systems.OperaDriver registration is skipped:
+Unable to create new instances on this machine.
+02:03:21.719 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+02:03:21.719 INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
+2018-03-27 02:03:21.814:INFO:osjs.Server:main: jetty-9.2.15.v20160210
+2018-03-27 02:03:21.862:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@47af7f3d{/,null,AVAILABLE}
+2018-03-27 02:03:21.901:WARN:osjuc.AbstractLifeCycle:main: FAILED ServerConnector@1a482e36{HTTP/1.1}{0.0.0.0:4444}: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(Unknown Source)
+	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(Unknown Source)
+	at org.seleniumhq.jetty9.server.ServerConnector.open(ServerConnector.java:321)
+	at org.seleniumhq.jetty9.server.AbstractNetworkConnector.doStart(AbstractNetworkConnector.java:80)
+	at org.seleniumhq.jetty9.server.ServerConnector.doStart(ServerConnector.java:236)
+	at org.seleniumhq.jetty9.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.seleniumhq.jetty9.server.Server.doStart(Server.java:366)
+	at org.seleniumhq.jetty9.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.openqa.selenium.remote.server.SeleniumServer.boot(SeleniumServer.java:147)
+	at org.openqa.grid.selenium.GridLauncherV3$1.launch(GridLauncherV3.java:229)
+	at org.openqa.grid.selenium.GridLauncherV3.main(GridLauncherV3.java:91)
+2018-03-27 02:03:21.903:WARN:osjuc.AbstractLifeCycle:main: FAILED org.seleniumhq.jetty9.server.Server@2f9f7dcf: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(Unknown Source)
+	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(Unknown Source)
+	at org.seleniumhq.jetty9.server.ServerConnector.open(ServerConnector.java:321)
+	at org.seleniumhq.jetty9.server.AbstractNetworkConnector.doStart(AbstractNetworkConnector.java:80)
+	at org.seleniumhq.jetty9.server.ServerConnector.doStart(ServerConnector.java:236)
+	at org.seleniumhq.jetty9.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.seleniumhq.jetty9.server.Server.doStart(Server.java:366)
+	at org.seleniumhq.jetty9.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.openqa.selenium.remote.server.SeleniumServer.boot(SeleniumServer.java:147)
+	at org.openqa.grid.selenium.GridLauncherV3$1.launch(GridLauncherV3.java:229)
+	at org.openqa.grid.selenium.GridLauncherV3.main(GridLauncherV3.java:91)
+Usage: <main class> [options]
+  Options:
+    -browserTimeout
+       <Integer> in seconds : number of seconds a browser session is allowed to
+       hang (0 means indefinite) while a WebDriver command is running (example:
+       driver.get(url)). If the timeout is reached while a WebDriver command is still processing,
+       the session will quit. Minimum value is 60. Default is 0
+    -debug
+       <Boolean> : enables LogLevel.FINE. Default is false (if omitted)
+       Default: false
+    -jettyThreads, -jettyMaxThreads
+       <Integer> : max number of threads for Jetty. Default is 200
+    -log
+       <String> filename : the filename to use for logging. If omitted, will log
+       to STDOUT
+    -port
+       <Integer> : the port number the server will use. Defaults to [4444]. When
+       "role" is a set to [node], default is [5555]
+       Default: 4444
+    -role
+       <String> options are [hub], [node], or [standalone] : Default is
+       [standalone]
+       Default: standalone
+    -timeout, -sessionTimeout
+       <Integer> in seconds : Specifies the timeout before the server
+       automatically kills a session that hasn't had any activity in the last X seconds. The
+       test slot will then be released for another test to use. This is typically
+       used to take care of client crashes. For grid hub/node roles, cleanUpCycle
+       must also be set. Default is 1800 (30 minutes)
+       Default: 1800
+
+java.lang.RuntimeException: java.net.BindException: Address already in use
+	at org.openqa.selenium.remote.server.SeleniumServer.boot(SeleniumServer.java:149)
+	at org.openqa.grid.selenium.GridLauncherV3$1.launch(GridLauncherV3.java:229)
+	at org.openqa.grid.selenium.GridLauncherV3.main(GridLauncherV3.java:91)
+Caused by: java.net.BindException: Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.Net.bind(Unknown Source)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(Unknown Source)
+	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(Unknown Source)
+	at org.seleniumhq.jetty9.server.ServerConnector.open(ServerConnector.java:321)
+	at org.seleniumhq.jetty9.server.AbstractNetworkConnector.doStart(AbstractNetworkConnector.java:80)
+	at org.seleniumhq.jetty9.server.ServerConnector.doStart(ServerConnector.java:236)
+	at org.seleniumhq.jetty9.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.seleniumhq.jetty9.server.Server.doStart(Server.java:366)
+	at org.seleniumhq.jetty9.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.openqa.selenium.remote.server.SeleniumServer.boot(SeleniumServer.java:147)
+	... 2 more
