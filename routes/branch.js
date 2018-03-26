@@ -32,6 +32,9 @@ router.get('/:branch/:commit', (req, res) => {
 			let files = parseGit.files(result);
 
 			res.render('commit', {pageName: 'commit', nav: true, branchName: req.params.branch, commitName: req.params.commit, files: files});
+		}, error => {
+			//console.log(error);
+			throw new Error(error);
 		});
 });
 
