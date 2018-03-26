@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    if commits
+        div.main__title Commits
+        div.commits.main__block
+            table.commits__table
+                thead
+                    tr
+                        th Commit
+                        th Comment
+                        th Author
+                        th Date
+                each commit in commits
+                    tr
+                        td
+                            a(href=commit.commit)= commit.commit
+                        td= commit.comment
+                        td= commit.author
+                        td= commit.date
+    div.main__title Files
+    include blocks/Files/files
+
+
+

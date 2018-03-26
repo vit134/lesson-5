@@ -1,20 +1,37 @@
-sudo: false
+sudo: required
 language: node_js
 node_js:
   - node
   - 8
-service:
+services:
   - docker
-install:
-  - docker build -t lesson-5 .
-  - docker run -d -p 127.0.0.1:80:80 --name lesson-5 lesson-5
+cache:
+  directories:
+  - node_modules
+
 script:
-  - docker ps | grep -q lesson-5
+  - npm run lint
+  - npm run style-lint
+
+aliases:
+  deploy: &deploy
+    provider: heroku
+    api_key:
+      secure: iGrgXex89djgD1y42DUjhatesxZMuZOMNsFLK6c8TT+xvLCAM2SV1aLg4rzRNuRff9i2VDty9nnoYtJShfFl2QQk/+5zx9eSlMqJ3cw9KqqjQ+H7di8jCgIBKm8djTtn3HtJdkyLnLfCn4S5JXjLbXgB4T+h+bNkHjTE1551BsJ+vcmeO/JECaoS8aqyNULAwL2pHYu3AIHsUyabd4WiQuWpBpJ4uJ/0aB4kF4cHfCApeosv+LWbTDEeA3yhxrcXasVOX2iuDilWoS9Ge1Vz94CzmNq7DWXTyLcKhznzgjpWJCd3Ut8TutoZJ0HtXlbkHBxQpPFEQQCmkBelhnudPniqK/jg0PcX529QhJ7AS2WOQR+CwmjUs+tQqYUd/XrnEvwa/l9mfTPgx5laP9eDgdGLHhq4VZTglYZmLRGP+IcOHWpPvuYcNGtF48SpbL5C6WUlWM5+qATEysaKGFfbKgz2MlExDBagYlipVfhVKyok8u1DjLSSdyLtpG2dFr3cVCMY40YE9X8hivmQdCsFYxnBw7NFI/d5A0xgO2JqpoSpuotroPi+ERl7wfnBFdMuB0Bb9p0UcLQBlm5aoJPl4/udAj8aVY3+NBRJIzGZJv5eDYlC7SrB9c5WizS8UIpbas6r98oHzeYNNGXOeImbaJCcpOqCq0h1LblfBHo+8D8=
+    skip_cleanup: true
+
 jobs:
   include:
-    stage: Deploy
-    deploy:
-      provider: heroku
-      api_key:
-          secure: iGrgXex89djgD1y42DUjhatesxZMuZOMNsFLK6c8TT+xvLCAM2SV1aLg4rzRNuRff9i2VDty9nnoYtJShfFl2QQk/+5zx9eSlMqJ3cw9KqqjQ+H7di8jCgIBKm8djTtn3HtJdkyLnLfCn4S5JXjLbXgB4T+h+bNkHjTE1551BsJ+vcmeO/JECaoS8aqyNULAwL2pHYu3AIHsUyabd4WiQuWpBpJ4uJ/0aB4kF4cHfCApeosv+LWbTDEeA3yhxrcXasVOX2iuDilWoS9Ge1Vz94CzmNq7DWXTyLcKhznzgjpWJCd3Ut8TutoZJ0HtXlbkHBxQpPFEQQCmkBelhnudPniqK/jg0PcX529QhJ7AS2WOQR+CwmjUs+tQqYUd/XrnEvwa/l9mfTPgx5laP9eDgdGLHhq4VZTglYZmLRGP+IcOHWpPvuYcNGtF48SpbL5C6WUlWM5+qATEysaKGFfbKgz2MlExDBagYlipVfhVKyok8u1DjLSSdyLtpG2dFr3cVCMY40YE9X8hivmQdCsFYxnBw7NFI/d5A0xgO2JqpoSpuotroPi+ERl7wfnBFdMuB0Bb9p0UcLQBlm5aoJPl4/udAj8aVY3+NBRJIzGZJv5eDYlC7SrB9c5WizS8UIpbas6r98oHzeYNNGXOeImbaJCcpOqCq0h1LblfBHo+8D8=
-      skip_cleanup: true
+    - stage: lint
+      script:
+        - npm run lint
+        - npm run style-lint
+
+    - stage: Deploy
+      script:
+        - npm run build:prod
+      deploy:
+        <<: *deploy
+        app: lesson-5-staging
+        on:
+          all_branches: true
