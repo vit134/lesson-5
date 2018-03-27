@@ -11,6 +11,7 @@
     "build:prod": "npm run lint && npm run style-lint && gulp build --env production",
     "clone": "git clone --mirror -q https://github.com/vit134/lesson-5 ./local-repo/.git",
     "test": "mocha",
+    "int-test": "wdio wdio.local.conf.js",
     "start": "node ./bin/www",
     "start:dev": "nodemon ./bin/www"
   },
@@ -24,7 +25,8 @@
     "moment": "^2.21.0",
     "morgan": "~1.9.0",
     "pug": "2.0.0-beta11",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "wdio-mocha-framework": "^0.5.13"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
@@ -59,6 +61,9 @@
     "rebuild": "^0.1.2",
     "stylelint": "^9.1.3",
     "stylelint-config-standard": "^18.2.0",
+    "wdio-selenium-standalone-service": "0.0.10",
+    "wdio-spec-reporter": "^0.1.4",
+    "webdriverio": "^4.12.0",
     "webpack": "^4.2.0",
     "webpack-cli": "^2.0.12"
   },

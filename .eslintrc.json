@@ -6,6 +6,9 @@
     "node": true,
     "mocha": true
   },
+  "globals": {
+    "browser": "true"
+  },
   "extends": "eslint:recommended",
   "parserOptions": {
     "ecmaVersion": 8,

@@ -19,6 +19,7 @@
         }
     }
 
+
     & li,
     & li a {
         font-size: 18px;
@@ -31,12 +32,11 @@
         position: relative;
         list-style: none;
 
-        .visible > ul {
+        &.visible > ul {
             display: block !important;
         }
 
-        .directory {
-
+        &.directory {
             &:before {
                 content: '';
                 display: block;
@@ -50,8 +50,7 @@
             }
         }
 
-        .file {
-
+        &.file {
             &:before {
                 content: '';
                 display: block;
