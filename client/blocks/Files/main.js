@@ -1,5 +1,5 @@
 module.exports = (function () {
-	var dir = document.querySelectorAll('.directory');
+	var dir = document.querySelectorAll('.files__directory');
 
 	dir.forEach(function (d) {
 		d.addEventListener('click', function(e) {

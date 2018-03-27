@@ -35,33 +35,33 @@
         &.visible > ul {
             display: block !important;
         }
+    }
 
-        &.directory {
-            &:before {
-                content: '';
-                display: block;
-                position: absolute;
-                width: 15px;
-                height: 15px;
-                top: 3px;
-                left: -20px;
-                background: url('../folder.svg') center no-repeat;
-                background-size: 100%;
-            }
+    &__directory {
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            top: 3px;
+            left: -20px;
+            background: url('../folder.svg') center no-repeat;
+            background-size: 100%;
         }
+    }
 
-        &.file {
-            &:before {
-                content: '';
-                display: block;
-                position: absolute;
-                width: 15px;
-                height: 15px;
-                top: 2px;
-                left: -20px;
-                background: url('../file.svg') center no-repeat;
-                background-size: 100%;
-            }
+    &__file {
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            top: 2px;
+            left: -20px;
+            background: url('../file.svg') center no-repeat;
+            background-size: 100%;
         }
     }
 
