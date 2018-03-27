@@ -65,23 +65,19 @@ describe('ParseGitString', function() {
 
 		describe('Проверяем какие элементы вернулись', function() {
 			it('Должны вернуться элементы commit, author, date, comment', function () {
-				//let map = ['author', 'commit', 'date', 'comment'];
-
 				assert.isTrue(checkObjProp(map, obj));
 			});
 		});
 
 		describe('Проверяем тип данных элементов', function() {
 			it('Должны вернуться string, string, string, string', function () {
-				//let map = ['author', 'commit', 'date', 'comment'];
-
 				assert.isTrue(chechTypeOfProp(map, obj));
 			});
 		});
 	});
 
 	describe('ParseGitString.files', function() {
-		//на вход переждеаем строку
+		//на вход передеаем строку
 		let file = {data: ['100644 blob 93f13619916123cf5434dab2ffcc8263c7420af1\t.dockerignore\n100644 blob 62a8320b47a58eed738d5569d12841ef0d55ddb5\t.eslintignore\n']};
 
 		//функция возвращает массив объектов, берем первый элемент

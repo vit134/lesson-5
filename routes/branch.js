@@ -35,6 +35,7 @@ router.get('/:branch/:commit', (req, res) => {
 
 			res.render('commit', {
 				pageName: 'commit',
+				title: 'Express-commit-' + req.params.commit.substr(-6,6),
 				nav: true,
 				branchName: req.params.branch,
 				commitName: req.params.commit,
