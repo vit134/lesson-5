@@ -1,7 +1,7 @@
 const assert = require('chai').assert;
 const url = 'http://localhost:3000';
 
-describe('Главная страница', () => {
+/*describe('Главная страница', () => {
 	describe('Главная страница', () => {
 		it('Должен быть title === Express', () => {
 			browser.url(url);
@@ -32,20 +32,55 @@ describe('Главная страница', () => {
 			assert(branchCurrent > 0);
 		});
 	});
-});
+});*/
 
 describe('Просмотр ветки', () => {
-	describe('Просмотр ветки', () => {
-		it('Должен произойти переход на страницу текущей ветки и поиск коммитов и файлов', () => {
+	describe('Кликнуть на название ветки', () => {
+		it('По клику на название ветки должен перейти на страницу соответствующей ветки и сравнить заголовки', () => {
 			browser.url(url);
 
-			let branchCurrentHref = browser.selectorExecute('.branches__link.current', function(link) {
-				return link.getAttribute('href');
+			let currentBranch = $('.branches__link.current');
+			let branchName = currentBranch.getAttribute('href').split(url + '/branch/')[1].replace('/','');
+
+			currentBranch.click();
+
+			assert(browser.getTitle() === 'Express-branch-' + branchName);
+		});
+	});
+
+	describe('Просмотр страницы ветки', () => {
+		it('По клику на ветку должен перейти на страницу соответствующей ветки и найти там коммиты и дерево файлов', () => {
+			browser.url(url);
+
+			let commits = false;
+			let files = false;
+
+			let currentBranch = $('.branches__link.current');
+
+			currentBranch.click();
+
+			let commitTable = $('.commits__table');
+
+			let commitCount = commitTable.selectorExecute('tr', function(commit) {
+				return commit.length;
 			});
 
-			browser(url + branchCurrentHref);
+			if (commitCount > 0) {
+				commits = true;
+			}
 
-			assert(browser.getTitle() === 'Express');
+			let filesBlock = $('.files > ul');
+
+			let filesCount = filesBlock.selectorExecute('li', function(file) {
+				return file.length;
+			});
+
+			if (filesCount > 0) {
+				files = true;
+			}
+
+			assert(commits && files);
+			
 		});
 	});
 });
