@@ -33,3 +33,19 @@ describe('Главная страница', () => {
 		});
 	});
 });
+
+describe('Просмотр ветки', () => {
+	describe('Просмотр ветки', () => {
+		it('Должен произойти переход на страницу текущей ветки и поиск коммитов и файлов', () => {
+			browser.url(url);
+
+			let branchCurrentHref = browser.selectorExecute('.branches__link.current', function(link) {
+				return link.getAttribute('href');
+			});
+
+			browser(url + branchCurrentHref);
+
+			assert(browser.getTitle() === 'Express');
+		});
+	});
+});

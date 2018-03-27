@@ -1,14 +1,12 @@
-const encodeDecode = require('./EncodeDecodeStr');
-
 const createHtml = filesTree => {
 	let glogbalUl = '<ul>';
 
-	const createItem = (name, type, link, empty) => {
+	const createItem = (name, type, hash, empty) => {
 
 		let ul = `<li class="${type}">`;
 
-		if (link && link !== '') {
-			ul += `<a href="/file/${name}?path=${link}">${name}</a>`;
+		if (hash && hash !== '') {
+			ul += `<a href="/file/${hash}?name=${name}">${name}</a>`;
 		} else {
 			ul += name;
 		}
@@ -27,14 +25,13 @@ const createHtml = filesTree => {
 	};
 
 	const createTreeHtml = tree => {
-
 		const walk = items => {
 			let filesInFolder = '';
 
 			if (items) {
 				items.forEach(item => {
 					if (item.type === 'directory') {
-
+						
 						if (item.children && item.children.length > 0) {
 							glogbalUl += createItem(item.name, item.type, null, !item.children);
 							walk(item.children);
@@ -43,7 +40,7 @@ const createHtml = filesTree => {
 							glogbalUl += createItem(item.nameitem.type, null, true);
 						}
 					} else {
-						filesInFolder += createItem(item.name, item.type, encodeDecode(item.path).encode(), true);
+						filesInFolder += createItem(item.name, item.type, item.hash, true);
 					}
 				});
 			}
