@@ -41,13 +41,22 @@ jobs:
           branch: master
 
     - stage: Deploy to stage-2
-          script:
-            - npm run build:prod
-          deploy:
-            <<: *deploy
-            app: lesson-5-staging-2
-            on:
-              branch: staging
+      script:
+        - npm run build:prod
+      deploy:
+        <<: *deploy
+        app: lesson-5-staging-2
+        on:
+          branch: staging
+
+    - stage: Deploy to test
+      script:
+        - npm run build:prod
+      deploy:
+        <<: *deploy
+        app: lesson-5-test
+        on:
+          all_branch: true
 
 
 
