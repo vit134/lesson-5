@@ -22,7 +22,7 @@ const goToFirstCommit = () => {
 	firstCommit.click();
 
 	return commitHash;
-}
+};
 
 const findFilesBlock = () => {
 	let files = false;
