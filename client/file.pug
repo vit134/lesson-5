@@ -7,5 +7,7 @@ block vendorStyles
 block content
     div.main__title File - #{fileName}
     div.file.main__block
-        pre.file__pre
-            code= data
+        if (data)
+            div#file_pre
+                pre.file__pre
+                    code= data

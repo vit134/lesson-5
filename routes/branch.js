@@ -38,7 +38,7 @@ router.get('/:branch/:commit', (req, res) => {
 				nav: true,
 				branchName: req.params.branch,
 				commitName: req.params.commit,
-				files: files
+				files: getTree(files)
 			});
 		}, error => {
 			throw new Error(error);

@@ -44,6 +44,8 @@ describe('Просмотр ветки', () => {
 
 			currentBranch.click();
 
+			//browser.close();
+
 			assert(browser.getTitle() === 'Express-branch-' + branchName);
 		});
 	});
@@ -78,9 +80,46 @@ describe('Просмотр ветки', () => {
 			if (filesCount > 0) {
 				files = true;
 			}
-
-			assert(commits && files);
 			
+			assert(commits && files);
+
+		});
+	});
+
+	describe('Работа с деревом файлов', () => {
+		it('должен открыть каталог найти там первый файл, перейти на страницу этого файла и проверить есть открылось ли его содержимое', () => {
+			browser.url(url);
+
+			let file = false;
+
+			let currentBranch = $('.branches__link.current');
+
+			currentBranch.click();
+
+			let firstFolder = $$('li.files__directory')[0];
+
+			firstFolder.click();
+
+			let firstFile = $$('.files__file')[0];
+
+			let firstFileLink;
+
+			if (firstFile.isVisible()) {
+				firstFileLink = $$('.files__file > a')[0];
+
+				firstFileLink.click();
+
+				let isEx = $('#file_pre').isExisting();
+				
+
+
+				if (isEx) {
+					file = true;
+				}
+			}
+			
+			assert(file);
+
 		});
 	});
 });
