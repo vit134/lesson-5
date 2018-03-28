@@ -5,6 +5,8 @@ module.exports = files => {
 		children: []
 	}];
 
+	let fileType = 'file';
+	let dirType = 'directory';
 
 	files.map(function (item) {
 		let allFolders = item.path.split('/');
@@ -18,17 +20,19 @@ module.exports = files => {
 
 			allFolders.map(function (fol) {
 				thisIndex = -1;
+
 				thisFolder.filter(function (folder, index) {
 					if (folder.name === fol) {
 						thisIndex = index;
 					}
 				});
+
 				if (thisIndex === -1) {
 					thisIndex = thisFolder.length;
 					thisFolder.push({
 						name: fol,
 						path: thisPath === '' ? thisPath + fol : thisPath + '/' + fol,
-						type: 'directory',
+						type: dirType,
 						children: []
 					});
 				}
@@ -40,14 +44,14 @@ module.exports = files => {
 			thisFolder.push({
 				name: file,
 				path: thisPath + '/' + file,
-				type: 'file',
+				type: fileType,
 				hash: item.hash
 			});
 		} else {
 			thisFolder.push({
 				name: item.name,
 				path: thisPath + item.path,
-				type: 'file',
+				type: fileType,
 				hash: item.hash
 			});
 		}

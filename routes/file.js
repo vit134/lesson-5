@@ -9,7 +9,7 @@ router.get('/:hash', (req, res) => {
 
 	getFileContent
 		.then(result => {
-			res.render('file', {pageName: 'index', nav: false, fileName: req.query.name, data: result.data});
+			res.render('file', {pageName: 'file', nav: false, fileName: req.query.name, data: result.data});
 		});
 });
 

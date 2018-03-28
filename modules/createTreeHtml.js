@@ -1,9 +1,9 @@
 const createHtml = filesTree => {
-	let glogbalUl = '<ul>';
+	let glogbalUl = '<ul class="files__root">';
 
 	const createItem = (name, type, hash, empty) => {
 
-		let ul = `<li class="${type}">`;
+		let ul = `<li class="files__${type}">`;
 
 		if (hash && hash !== '') {
 			ul += `<a href="/file/${hash}?name=${name}">${name}</a>`;

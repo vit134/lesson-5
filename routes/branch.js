@@ -16,7 +16,13 @@ router.get('/:branch', (req, res) => {
 		let commits = parseGit.commit(commitResult);
 		let files = parseGit.files(filesResult);
 
-		res.render('branch', {pageName: 'branch', branchName: req.params.branch, commits: commits, files: getTree(files)});
+		res.render('branch', {
+			pageName: 'branch',
+			title: 'Express-branch-' + req.params.branch,
+			branchName: req.params.branch,
+			commits: commits,
+			files: getTree(files)
+		});
 	});
 });
 
@@ -29,10 +35,11 @@ router.get('/:branch/:commit', (req, res) => {
 
 			res.render('commit', {
 				pageName: 'commit',
+				title: 'Express-commit-' + req.params.commit.substr(-6,6),
 				nav: true,
 				branchName: req.params.branch,
 				commitName: req.params.commit,
-				files: files
+				files: getTree(files)
 			});
 		}, error => {
 			throw new Error(error);
