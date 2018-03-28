@@ -1,4 +1,6 @@
 module.exports = files => {
+	console.log(files);
+
 	let newData = [{
 		name: '/',
 		path: '',
@@ -18,11 +20,13 @@ module.exports = files => {
 
 			allFolders.map(function (fol) {
 				thisIndex = -1;
+
 				thisFolder.filter(function (folder, index) {
 					if (folder.name === fol) {
 						thisIndex = index;
 					}
 				});
+
 				if (thisIndex === -1) {
 					thisIndex = thisFolder.length;
 					thisFolder.push({

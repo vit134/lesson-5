@@ -1,10 +1,18 @@
 const assert = require('chai').assert;
+const rm  = require('rimraf');
+//const Jimp = require('jimp');
+
+const screensPath = './screens/';
 const url = 'http://localhost:3000';
-
 const defaultTitle = 'Express';
-
 const branchesLinkSelector = '.branches__link';
 const currentBranchSelector = branchesLinkSelector + '.current';
+
+
+rm(screensPath + '*', () => {
+	// eslint-disable-next-line
+	console.log('clear folder ./screens');
+});
 
 const goToBranch = (selectorOfBranch) => {
 	let currentBranch = $(selectorOfBranch);
@@ -41,6 +49,7 @@ const findFilesBlock = () => {
 
 	return files;
 };
+
 
 describe('Главная страница', () => {
 	describe('Главная страница. Test#1', () => {
@@ -231,6 +240,57 @@ describe('Страница коммита', () => {
 			browser.saveScreenshot('./screens/test9.png');
 
 			assert(branchFlag && commitHashFlag);
+
+		});
+	});
+
+	describe('Дерево файлов на странице коммита. Test#10', () => {
+		it('дерево должно корректно кликаться', () => {
+			browser.url(url);
+
+			let dasIsWork = false;
+
+			goToBranch(currentBranchSelector);
+			goToFirstCommit();
+
+			let isFilesBlock = findFilesBlock();
+
+			if (isFilesBlock) {
+
+				let folders = $$('.files__root > .files__directory');
+
+				let needFolder = folders[1];
+
+				needFolder.click();
+				browser.pause(200);
+
+				needFolder.click();
+				if (needFolder.$('ul').isVisible()) {
+					dasIsWork = true;
+				}
+				
+			}
+
+			browser.saveScreenshot('./screens/test10.png');
+
+			assert(dasIsWork);
+
+		});
+	});
+
+	describe('Вернуться на страницу ветки со страницы коммита. Test#11', () => {
+		it('по клику на название ветки в хедере должен произойти переход на страницу нужной ветки и сравниться заголовки', () => {
+			browser.url(url);
+			let branchName = goToBranch(currentBranchSelector);
+			goToFirstCommit();
+
+			let breadCrumbsItem = $$('.breadcrumbs__item');
+
+			breadCrumbsItem[0].click();
+
+			browser.saveScreenshot('./screens/test11.png');
+
+			assert(browser.getTitle() === defaultTitle + '-branch-' + branchName);
 
 		});
 	});
