@@ -1,6 +1,4 @@
 module.exports = files => {
-	console.log(files);
-
 	let newData = [{
 		name: '/',
 		path: '',
