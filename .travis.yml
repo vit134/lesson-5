@@ -30,7 +30,6 @@ jobs:
     - stage: Test
       script:
         - npm test
-        - npm run int-test
 
     - stage: Deploy
       if: tag IS blank
