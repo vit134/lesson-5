@@ -29,9 +29,11 @@ jobs:
     
     - stage: Test
       script:
-        - npm run test
+        - npm test
+        - npm run int-test
 
     - stage: Deploy
+      if: tag IS blank
       script:
         - npm run build:prod
       deploy:
@@ -49,14 +51,15 @@ jobs:
         on:
           branch: staging
 
-    - stage: Deploy to test
+    - stage: Deploy to prodaction
+      if: tag IS present
       script:
         - npm run build:prod
       deploy:
         <<: *deploy
-        app: lesson-5-test
+        app: lesson-5-production
         on:
-          all_branches: true
+          branch: master
 
 
 
