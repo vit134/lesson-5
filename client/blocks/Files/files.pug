@@ -1,8 +1,1 @@
-div.files.main__block
-    table
-        each file in files
-            tr
-                td
-                    a(href= "/file/" + file.hash + "?name=" + file.name)= file.path
-                td= file.name
-                td= file.hash
+div.files.main__block !{files}

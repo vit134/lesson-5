@@ -4,12 +4,12 @@ const router = express.Router();
 const gitExec = require('../modules/GitExec');
 
 
-router.get('/:name', (req, res) => {
-	let getFileContent = gitExec(['show', req.params.name]);
+router.get('/:hash', (req, res) => {
+	let getFileContent = gitExec(['show', req.params.hash]);
 
 	getFileContent
 		.then(result => {
-			res.render('file', {pageName: 'index', nav: false, fileName: req.query.name, data: result.data});
+			res.render('file', {pageName: 'file', nav: false, fileName: req.query.name, data: result.data});
 		});
 });
 

@@ -1,44 +1,61 @@
 module.exports = files => {
-	//console.log('!prepare tree data!');
-		
-	//console.log('files',files);
+	let newData = [{
+		name: '/',
+		path: '',
+		children: []
+	}];
 
+	let fileType = 'file';
+	let dirType = 'directory';
 
-	//console.log(files);
-	/*let prepareTree = files => {
-		let papki = {
-			folders: {},
-			files: []
-		};
+	files.map(function (item) {
+		let allFolders = item.path.split('/');
+		let thisFolder, thisPath, thisIndex;
 
+		thisFolder = newData[0].children;
+		thisPath = newData[0].path;
 
-		for (var i = 0, item; item = files[i++];) {
-			let all = item.path.split('/');
-			let file = all.pop();
-			let parent = papki;
+		if (allFolders.length > 1) {
+			let file = allFolders.pop();
 
-			for (var j = 1, jitem; jitem = all[j++];) {
-				if (jitem in parent.folders) {
-					parent = parent.folders[jitem];
-				} else {
-					parent.folders[jitem] = {
-						folders: {},
-						files: []
-					};
+			allFolders.map(function (fol) {
+				thisIndex = -1;
 
-					parent = parent.folders[jitem];
+				thisFolder.filter(function (folder, index) {
+					if (folder.name === fol) {
+						thisIndex = index;
+					}
+				});
+
+				if (thisIndex === -1) {
+					thisIndex = thisFolder.length;
+					thisFolder.push({
+						name: fol,
+						path: thisPath === '' ? thisPath + fol : thisPath + '/' + fol,
+						type: dirType,
+						children: []
+					});
 				}
-			}
-			parent.files.push(file);
+
+				thisPath = thisFolder[thisIndex].path;
+				thisFolder = thisFolder[thisIndex].children;
+			});
+
+			thisFolder.push({
+				name: file,
+				path: thisPath + '/' + file,
+				type: fileType,
+				hash: item.hash
+			});
+		} else {
+			thisFolder.push({
+				name: item.name,
+				path: thisPath + item.path,
+				type: fileType,
+				hash: item.hash
+			});
 		}
+	});
 
-		return papki;
-	};*/
-	
-	//console.log(prepareTree(files));
-
-
-
-
-	return files;
+	return newData;
 };

@@ -13,7 +13,7 @@ block content
                         th Date
                 each commit in commits
                     tr
-                        td
+                        td.commits__table__hash
                             a(href=commit.commit)= commit.commit
                         td= commit.comment
                         td= commit.author

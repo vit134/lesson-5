@@ -1,7 +1,5 @@
 const express = require('express');
-
 const router = express.Router();
-
 const gitExec = require('../modules/GitExec');
 
 router.get('/', (req, res) => {
@@ -9,7 +7,7 @@ router.get('/', (req, res) => {
 		.then(result => {
 			let branches = [{}];
 
-			if (!result.status) {
+			if (result && !result.status) {
 				let branchesInfo = result.data[0].split('\n');
 
 				branches = branchesInfo.map((el) => {
@@ -19,15 +17,12 @@ router.get('/', (req, res) => {
 						current: el.indexOf('*') !== -1 ? false : true
 					};
 				});
+				res.render('index', {pageName: 'index', title: 'Express', branches: branches});
 			}
-			res.render('index', {pageName: 'index', title: 'Express', branches: branches});
-		},
-		error => {
-			// вторая функция - запустится при вызове reject
-			//console.log('index.js Rejected: ' + error); // error - аргумент reject
-			res.render('error', {pageName: 'index', title: 'Express', message: error});
+
+		}, error => {
+			res.render('error', {pageName: 'error', title: 'Express', message: 'error', error: {status: error.message}});
 		});
 });
-
 
 module.exports = router;
