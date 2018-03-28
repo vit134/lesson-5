@@ -7,7 +7,7 @@ services:
   - docker
 cache:
   directories:
-  - node_modules
+    - node_modules
 
 script:
   - npm run lint
@@ -56,7 +56,7 @@ jobs:
         <<: *deploy
         app: lesson-5-test
         on:
-          all_branch: true
+          all_branches: true
 
 
 
