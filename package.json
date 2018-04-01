@@ -10,7 +10,7 @@
     "build:dev": "gulp watch --env development",
     "build:prod": "npm run lint && npm run style-lint && gulp build --env production",
     "clone": "git clone --mirror -q https://github.com/vit134/lesson-5 ./local-repo/.git",
-    "test": "mocha",
+    "test": "istanbul cover _mocha",
     "int-test": "wdio wdio.local.conf.js",
     "start": "node ./bin/www",
     "start:dev": "nodemon ./bin/www"
@@ -54,6 +54,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.1.2",
     "gulp-watch": "^4.3.11",
+    "istanbul": "^0.4.5",
     "less-loader": "^4.1.0",
     "mocha": "^5.0.5",
     "node-gyp": "^3.6.2",
